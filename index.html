@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friendship License Database | Official Verification Portal</title>
+  <meta name="description" content="Official verification portal for registered Friendship License holders.">
+
+  <!-- Favicon (inline shield SVG) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23EC6A96' d='M50 5 L90 20 V50 C90 75 70 90 50 95 C30 90 10 75 10 50 V20 Z'/%3E%3Cpath fill='%23FFFFFF' d='M50 25 L60 45 H40 Z' /%3E%3C/svg%3E" type="image/svg+xml">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADING SCREEN
+  ============================================================= -->
+  <div id="loading-screen" class="loading-screen" role="status" aria-live="polite">
+    <div class="loading-content">
+      <div class="loading-seal">
+        <svg viewBox="0 0 100 100" class="loading-shield">
+          <path d="M50 5 L90 20 V50 C90 75 70 90 50 95 C30 90 10 75 10 50 V20 Z" fill="none" stroke="#EC6A96" stroke-width="3"/>
+          <path d="M50 30 L62 52 H38 Z" fill="#EC6A96"/>
+        </svg>
+      </div>
+      <h1 class="loading-title">Friendship License Database</h1>
+      <p class="loading-subtitle" id="loading-status">Initializing Database...</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="loading-progress-fill"></div>
+      </div>
+      <p class="progress-percent" id="loading-percent">0%</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MAIN SITE (hidden until loading completes)
+  ============================================================= -->
+  <div id="site" class="site">
+
+    <!-- ============================================================
+         HEADER / NAVBAR
+    ============================================================= -->
+    <header class="navbar" id="navbar">
+      <div class="navbar-inner">
+        <div class="navbar-brand">
+          <svg viewBox="0 0 100 100" class="navbar-shield" aria-hidden="true">
+            <path d="M50 5 L90 20 V50 C90 75 70 90 50 95 C30 90 10 75 10 50 V20 Z" fill="#EC6A96"/>
+            <path d="M50 25 L60 45 H40 Z" fill="#FFFFFF"/>
+          </svg>
+          <div class="navbar-brand-text">
+            <span class="navbar-title">Friendship License Database</span>
+            <span class="navbar-subtitle">Govt. of Best Friends</span>
+          </div>
+        </div>
+        <div class="navbar-badge">
+          <span class="badge-dot" aria-hidden="true"></span>
+          Official Verification Portal
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============================================================
+           MAIN VERIFICATION CARD
+      ============================================================= -->
+      <section class="verify-section" aria-labelledby="verify-heading">
+        <div class="container">
+
+          <div class="verified-banner fade-up">
+            <svg viewBox="0 0 24 24" class="check-icon" aria-hidden="true">
+              <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="currentColor"/>
+            </svg>
+            LICENSE VERIFIED
+          </div>
+
+          <div class="license-card fade-up" id="license-card">
+            <div class="license-watermark" aria-hidden="true"></div>
+
+            <div class="license-card-header">
+              <div class="license-id-block">
+                <span class="license-label">License ID</span>
+                <span class="license-id">BFF-VGSD-1101</span>
+              </div>
+              <div class="license-status-block">
+                <span class="license-label">Database Status</span>
+                <span class="license-status">
+                  <span class="status-dot"></span> Active
+                </span>
+              </div>
+            </div>
+
+            <div class="license-card-body">
+              <div class="holder-photo-block">
+                <img src="image1.png" alt="Holder photograph placeholder" class="holder-photo">
+                <span class="photo-caption">Holder Photograph</span>
+              </div>
+
+              <div class="holder-details">
+                <div class="detail-row">
+                  <span class="detail-label">Holder</span>
+                  <span class="detail-value">Vidushi Gupta</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Nickname</span>
+                  <span class="detail-value nickname-script">Chidkuram ❤️</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Registered Best Friend</span>
+                  <span class="detail-value">Sarthak Daga</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Nickname</span>
+                  <span class="detail-value">Chashmish 🤓</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Valid From</span>
+                  <span class="detail-value">Class XI</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Valid Until</span>
+                  <span class="detail-value">Never Expires ♾️</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Last Verification</span>
+                  <span class="detail-value" id="last-verification-date">—</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           FRIENDSHIP ANALYSIS
+      ============================================================= -->
+      <section class="analysis-section" aria-labelledby="analysis-heading">
+        <div class="container">
+          <h2 id="analysis-heading" class="section-heading fade-up">Friendship Analysis Report</h2>
+          <p class="section-subheading fade-up">Automated diagnostics run by the Database on record data.</p>
+
+          <div class="analysis-grid">
+
+            <div class="stat-row fade-up">
+              <span class="stat-name">Trust</span>
+              <div class="stat-track"><div class="stat-fill" data-value="100"></div></div>
+              <span class="stat-number" data-count-to="1000000">0%</span>
+            </div>
+
+            <div class="stat-row fade-up">
+              <span class="stat-name">Loyalty</span>
+              <div class="stat-track"><div class="stat-fill" data-value="100"></div></div>
+              <span class="stat-number" data-count-to="1000000">0%</span>
+            </div>
+
+            <div class="stat-row fade-up">
+              <span class="stat-name">Roasting Skills</span>
+              <div class="stat-track"><div class="stat-fill" data-value="100"></div></div>
+              <span class="stat-number" data-count-to="10000">0%</span>
+            </div>
+
+            <div class="stat-row fade-up">
+              <span class="stat-name">Food Sharing</span>
+              <div class="stat-track"><div class="stat-fill" data-value="68"></div></div>
+              <span class="stat-number" data-count-to="68">0%</span>
+            </div>
+
+            <div class="stat-row fade-up">
+              <span class="stat-name">Patience</span>
+              <div class="stat-track"><div class="stat-fill" data-value="40"></div></div>
+              <span class="stat-number" data-count-to="40">0%</span>
+            </div>
+
+            <div class="stat-row fade-up">
+              <span class="stat-name">Chaos Level</span>
+              <div class="stat-track"><div class="stat-fill" data-value="100"></div></div>
+              <span class="stat-number" data-count-to="1000000">0%</span>
+            </div>
+
+            <div class="stat-row fade-up stat-row-infinite">
+              <span class="stat-name">Memory Collection</span>
+              <div class="stat-track"><div class="stat-fill stat-fill-infinite"></div></div>
+              <span class="stat-number">∞</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           WARNING CARD (Third Parties)
+      ============================================================= -->
+      <section class="notice-section" aria-labelledby="warning-heading">
+        <div class="container">
+          <div class="notice-card warning-card fade-up">
+            <div class="notice-card-header">
+              <svg viewBox="0 0 24 24" class="notice-icon warning-icon" aria-hidden="true">
+                <path d="M12 2L1 21h22L12 2zm0 5.5l7.5 13h-15L12 7.5zM11 10v5h2v-5h-2zm0 6v2h2v-2h-2z" fill="currentColor"/>
+              </svg>
+              <h3 id="warning-heading" class="notice-title">Warning To Third Parties</h3>
+            </div>
+            <p class="notice-text">
+              This person is officially registered as the licensed best friend of Sarthak Daga.
+            </p>
+            <p class="notice-text">
+              Unauthorized attempts to replace, steal or interfere with this friendship will be politely rejected.
+            </p>
+            <p class="notice-text notice-text-strong">Repeated interference may result in:</p>
+            <ul class="notice-list">
+              <li>Temporary anger issues</li>
+              <li>Unlimited roasting</li>
+              <li>Excessive teasing</li>
+              <li>Lifetime nickname assignment</li>
+            </ul>
+            <p class="notice-footer-text">Proceed at your own risk.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           NOTICE CARD (License Holder)
+      ============================================================= -->
+      <section class="notice-section" aria-labelledby="notice-heading">
+        <div class="container">
+          <div class="notice-card pink-card fade-up">
+            <div class="notice-card-header">
+              <svg viewBox="0 0 24 24" class="notice-icon pink-icon" aria-hidden="true">
+                <path d="M12 21s-6.7-4.35-9.3-8.1C1 10.1 1.6 6.6 4.6 5.1 7 3.9 9.6 4.9 12 7.6 14.4 4.9 17 3.9 19.4 5.1c3 1.5 3.6 5 1.9 7.8C18.7 16.65 12 21 12 21z" fill="currentColor"/>
+              </svg>
+              <h3 id="notice-heading" class="notice-title">Notice To License Holder</h3>
+            </div>
+            <p class="notice-text">Dear <span class="nickname-script inline-script">Chidkuram ❤️</span>,</p>
+            <p class="notice-text">
+              This friendship license has been issued exclusively to you.
+            </p>
+            <p class="notice-text">
+              If the holder ever attempts to deny, revoke or ignore this friendship, the following automatic penalties shall apply:
+            </p>
+            <ul class="notice-list">
+              <li>Unlimited teasing</li>
+              <li>Random embarrassing memory playback</li>
+              <li>One compulsory ice cream treat</li>
+              <li>Random meme attacks</li>
+              <li>And one biggest warning is you will be tickled until you laugh so much that your belly hurts...</li>
+            </ul>
+            <p class="notice-footer-text">No appeals accepted.</p>
+            <p class="notice-signature">Signed,<br>Chashmish 🤓</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           TIMELINE
+      ============================================================= -->
+      <section class="timeline-section" aria-labelledby="timeline-heading">
+        <div class="container">
+          <h2 id="timeline-heading" class="section-heading fade-up">Friendship Timeline</h2>
+          <p class="section-subheading fade-up">A record of key milestones on file.</p>
+
+          <div class="timeline">
+            <div class="timeline-line" aria-hidden="true"></div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag">Class XI</span>
+                <p class="timeline-text">Where it all began.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag">First Proper Conversation</span>
+                <p class="timeline-text">Record shows this is when things really started.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag">Countless Laughs</span>
+                <p class="timeline-text">Logged too many times to count individually.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag">Endless Roasting</span>
+                <p class="timeline-text">An ongoing entry, updated daily.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag">Still Best Friends</span>
+                <p class="timeline-text">Status confirmed as of today.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item timeline-item-final">
+              <div class="timeline-dot timeline-dot-final"></div>
+              <div class="timeline-content">
+                <span class="timeline-tag timeline-tag-final">Forever ♾️</span>
+                <p class="timeline-text">No expiry date on file.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           EASTER EGG - RENEW LICENSE
+      ============================================================= -->
+      <section class="renew-section">
+        <div class="container renew-container">
+          <button class="renew-trigger" id="renew-trigger" aria-haspopup="dialog">
+            <span class="renew-trigger-dot" aria-hidden="true"></span>
+            Renew License
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================= -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-line footer-title">Friendship License Database v1.0</p>
+        <p class="footer-line">Made with ❤️ by Sarthak Daga</p>
+        <p class="footer-line footer-small">Protected Under The Best Friend Protection Act.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ============================================================
+       RENEWAL MODAL
+  ============================================================= -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal" id="modal">
+      <div class="modal-state" id="modal-processing">
+        <div class="modal-spinner" aria-hidden="true"></div>
+        <p class="modal-text" id="modal-title">Processing...</p>
+      </div>
+      <div class="modal-state modal-state-hidden" id="modal-success">
+        <svg viewBox="0 0 24 24" class="modal-check" aria-hidden="true">
+          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z" fill="currentColor"/>
+        </svg>
+        <p class="modal-text modal-text-success">License Renewed Successfully</p>
+        <p class="modal-subtext">Valid Until</p>
+        <p class="modal-highlight">End Of The Universe ♾️</p>
+        <button class="modal-close" id="modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
