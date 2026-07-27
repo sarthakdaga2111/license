@@ -9,24 +9,84 @@
    6. Confetti
 ============================================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
-
+document.addEventListener("DOMContentLoaded", () => {
   /* ============================================================
      1. LOADING SCREEN SEQUENCE
   ============================================================= */
-  const loadingScreen = document.getElementById('loading-screen');
-  const loadingStatus = document.getElementById('loading-status');
-  const progressFill = document.getElementById('loading-progress-fill');
-  const progressPercent = document.getElementById('loading-percent');
-  const site = document.getElementById('site');
+  const loadingScreen = document.getElementById("loading-screen");
+  const loadingStatus = document.getElementById("loading-status");
+  const progressFill = document.getElementById("loading-progress-fill");
+  const progressPercent = document.getElementById("loading-percent");
+  const site = document.getElementById("site");
+  const memories = [
+    {
+      image: "images/image1.png",
+      title: "Random Selfie",
+      date: "2023",
+      description: "Cutest Selfie",
+    },
 
+    {
+      image: "images/image2.jpg",
+      title: "Made for Someone Special",
+      date: "2026",
+      description: "Best Photos since 2025-26",
+    },
+
+    {
+      image: "images/image3.jpeg",
+      title: "Super Special",
+      date: "2025",
+      description: "Best photos uptil 2025",
+    },
+
+    {
+      image: "images/image4.jpeg",
+      title: "Hottest Pic 2025 😍😍",
+      date: "2025",
+      description: "Someone just doesnt know how hot she isss...",
+    },
+  ];
+  const gallery = document.getElementById("memory-gallery");
+
+memories.forEach((memory,index)=>{
+
+gallery.innerHTML += `
+
+<div class="memory-card fade-up">
+
+    <img src="${memory.image}" alt="${memory.title}">
+
+    <div class="memory-content">
+
+        <h3>${memory.title}</h3>
+
+        <p class="memory-date">${memory.date}</p>
+
+        <p>${memory.description}</p>
+
+        <div class="memory-record">
+
+            <span>Memory ID</span>
+
+            <strong>MEM-${String(index+1).padStart(3,'0')}</strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+});
   const loadingMessages = [
-    'Initializing Database...',
-    'Authenticating Holder...',
-    'Connecting To Friendship Records...',
-    'Checking License...',
-    'Verifying...',
-    'License Verified ✓'
+    "Initializing Database...",
+    "Authenticating Holder...",
+    "Connecting To Friendship Records...",
+    "Checking License...",
+    "Verifying...",
+    "License Verified ✓",
   ];
 
   const totalDuration = 3000; // ~3 seconds
@@ -50,62 +110,65 @@ document.addEventListener('DOMContentLoaded', () => {
       progress = 100;
       clearInterval(progressInterval);
     }
-    progressFill.style.width = progress + '%';
-    progressPercent.textContent = Math.round(progress) + '%';
+    progressFill.style.width = progress + "%";
+    progressPercent.textContent = Math.round(progress) + "%";
   }, 30);
 
   // Fade to site after loading completes
   setTimeout(() => {
-    loadingScreen.classList.add('loading-hidden');
-    site.classList.add('site-visible');
-    document.body.style.overflow = 'auto';
+    loadingScreen.classList.add("loading-hidden");
+    site.classList.add("site-visible");
+    document.body.style.overflow = "auto";
 
     // Kick off stat bar animation once site is visible
     setTimeout(animateStats, 400);
   }, totalDuration + 300);
 
-
   /* ============================================================
      2. LAST VERIFICATION DATE
   ============================================================= */
-  const dateEl = document.getElementById('last-verification-date');
+  const dateEl = document.getElementById("last-verification-date");
   if (dateEl) {
     const today = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    dateEl.textContent = today.toLocaleDateString('en-US', options);
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    dateEl.textContent = today.toLocaleDateString("en-US", options);
   }
-
 
   /* ============================================================
      3. SCROLL REVEAL (fade-up elements + timeline)
   ============================================================= */
-  const fadeUpEls = document.querySelectorAll('.fade-up');
-  const timelineItems = document.querySelectorAll('.timeline-item');
+  const fadeUpEls = document.querySelectorAll(".fade-up");
+  const timelineItems = document.querySelectorAll(".timeline-item");
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-up-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-up-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 },
+  );
 
   fadeUpEls.forEach((el) => revealObserver.observe(el));
 
-  const timelineObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const delay = Array.from(timelineItems).indexOf(el) % 6 * 80;
-        setTimeout(() => el.classList.add('timeline-visible'), delay);
-        timelineObserver.unobserve(el);
-      }
-    });
-  }, { threshold: 0.3 });
+  const timelineObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = (Array.from(timelineItems).indexOf(el) % 6) * 80;
+          setTimeout(() => el.classList.add("timeline-visible"), delay);
+          timelineObserver.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.3 },
+  );
 
   timelineItems.forEach((el) => timelineObserver.observe(el));
-
 
   /* ============================================================
      4. COUNT-UP NUMBERS + PROGRESS BARS
@@ -116,20 +179,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statsAnimated) return;
     statsAnimated = true;
 
-    const fills = document.querySelectorAll('.stat-fill[data-value]');
-    const numbers = document.querySelectorAll('.stat-number[data-count-to]');
+    const fills = document.querySelectorAll(".stat-fill[data-value]");
+    const numbers = document.querySelectorAll(".stat-number[data-count-to]");
 
     // Animate width of bars
     fills.forEach((fill) => {
-      const value = fill.getAttribute('data-value');
+      const value = fill.getAttribute("data-value");
       requestAnimationFrame(() => {
-        fill.style.width = value + '%';
+        fill.style.width = value + "%";
       });
     });
 
     // Animate count-up numbers
     numbers.forEach((numEl) => {
-      const target = parseInt(numEl.getAttribute('data-count-to'), 10);
+      const target = parseInt(numEl.getAttribute("data-count-to"), 10);
       const duration = 1400;
       const startTime = performance.now();
 
@@ -139,11 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // ease-out cubic
         const eased = 1 - Math.pow(1 - progressRatio, 3);
         const current = Math.round(eased * target);
-        numEl.textContent = current + '%';
+        numEl.textContent = current + "%";
         if (progressRatio < 1) {
           requestAnimationFrame(tick);
         } else {
-          numEl.textContent = target + '%';
+          numEl.textContent = target + "%";
         }
       }
       requestAnimationFrame(tick);
@@ -151,41 +214,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Fallback: also trigger stats if analysis section is scrolled into view
-  const analysisSection = document.querySelector('.analysis-section');
+  const analysisSection = document.querySelector(".analysis-section");
   if (analysisSection) {
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateStats();
-          statsObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateStats();
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 },
+    );
     statsObserver.observe(analysisSection);
   }
-
 
   /* ============================================================
      5. RENEW LICENSE MODAL + BUTTON RIPPLE
   ============================================================= */
-  const renewTrigger = document.getElementById('renew-trigger');
-  const modalOverlay = document.getElementById('modal-overlay');
-  const modalProcessing = document.getElementById('modal-processing');
-  const modalSuccess = document.getElementById('modal-success');
-  const modalClose = document.getElementById('modal-close');
+  const renewTrigger = document.getElementById("renew-trigger");
+  const modalOverlay = document.getElementById("modal-overlay");
+  const modalProcessing = document.getElementById("modal-processing");
+  const modalSuccess = document.getElementById("modal-success");
+  const modalClose = document.getElementById("modal-close");
 
   function createRipple(e, button) {
-    const circle = document.createElement('span');
+    const circle = document.createElement("span");
     const diameter = Math.max(button.clientWidth, button.clientHeight);
     const radius = diameter / 2;
     const rect = button.getBoundingClientRect();
 
-    circle.style.width = circle.style.height = diameter + 'px';
-    circle.style.left = (e.clientX - rect.left - radius) + 'px';
-    circle.style.top = (e.clientY - rect.top - radius) + 'px';
-    circle.classList.add('ripple');
+    circle.style.width = circle.style.height = diameter + "px";
+    circle.style.left = e.clientX - rect.left - radius + "px";
+    circle.style.top = e.clientY - rect.top - radius + "px";
+    circle.classList.add("ripple");
 
-    const existingRipple = button.querySelector('.ripple');
+    const existingRipple = button.querySelector(".ripple");
     if (existingRipple) existingRipple.remove();
 
     button.appendChild(circle);
@@ -193,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (renewTrigger) {
-    renewTrigger.addEventListener('click', (e) => {
+    renewTrigger.addEventListener("click", (e) => {
       createRipple(e, renewTrigger);
       openRenewModal();
     });
@@ -201,38 +266,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openRenewModal() {
     modalOverlay.hidden = false;
-    modalProcessing.classList.remove('modal-state-hidden');
-    modalSuccess.classList.add('modal-state-hidden');
-    document.body.style.overflow = 'hidden';
+    modalProcessing.classList.remove("modal-state-hidden");
+    modalSuccess.classList.add("modal-state-hidden");
+    document.body.style.overflow = "hidden";
 
     setTimeout(() => {
-      modalProcessing.classList.add('modal-state-hidden');
-      modalSuccess.classList.remove('modal-state-hidden');
+      modalProcessing.classList.add("modal-state-hidden");
+      modalSuccess.classList.remove("modal-state-hidden");
       launchConfetti();
     }, 2000);
   }
 
   function closeRenewModal() {
     modalOverlay.hidden = true;
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = "auto";
   }
 
   if (modalClose) {
-    modalClose.addEventListener('click', closeRenewModal);
+    modalClose.addEventListener("click", closeRenewModal);
   }
 
   if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
+    modalOverlay.addEventListener("click", (e) => {
       if (e.target === modalOverlay) closeRenewModal();
     });
   }
 
-
   /* ============================================================
      6. CONFETTI (vanilla canvas)
   ============================================================= */
-  const canvas = document.getElementById('confetti-canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.getElementById("confetti-canvas");
+  const ctx = canvas.getContext("2d");
   let confettiPieces = [];
   let confettiAnimationId = null;
 
@@ -241,9 +305,15 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = window.innerHeight;
   }
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener("resize", resizeCanvas);
 
-  const confettiColors = ['#EC6A96', '#F8BBD0', '#FFD4E2', '#28A745', '#FFFFFF'];
+  const confettiColors = [
+    "#EC6A96",
+    "#F8BBD0",
+    "#FFD4E2",
+    "#28A745",
+    "#FFFFFF",
+  ];
 
   function createConfettiPiece() {
     return {
@@ -255,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
       speedX: Math.random() * 2 - 1,
       rotation: Math.random() * 360,
       rotationSpeed: Math.random() * 8 - 4,
-      opacity: 1
+      opacity: 1,
     };
   }
 
@@ -294,7 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.restore();
     });
 
-    confettiPieces = confettiPieces.filter((p) => p.opacity > 0 && p.y < canvas.height + 40);
+    confettiPieces = confettiPieces.filter(
+      (p) => p.opacity > 0 && p.y < canvas.height + 40,
+    );
 
     if (confettiPieces.length > 0) {
       confettiAnimationId = requestAnimationFrame(animateConfetti);
@@ -303,5 +375,4 @@ document.addEventListener('DOMContentLoaded', () => {
       confettiAnimationId = null;
     }
   }
-
 });

@@ -23,26 +23,26 @@
    1. VARIABLES & RESETS
 ============================================================= */
 :root {
-  --pink-lightest: #FFE8EF;
-  --pink-light: #FFD4E2;
-  --pink-mid: #F8BBD0;
-  --pink-accent: #EC6A96;
-  --white: #FFFFFF;
-  --gray-bg: #F7F7F7;
+  --pink-lightest: #ffe8ef;
+  --pink-light: #ffd4e2;
+  --pink-mid: #f8bbd0;
+  --pink-accent: #ec6a96;
+  --white: #ffffff;
+  --gray-bg: #f7f7f7;
   --text: #444444;
   --text-soft: #7a7a7a;
-  --green: #28A745;
-  --red: #D32F2F;
+  --green: #28a745;
+  --red: #d32f2f;
 
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
 
-  --shadow-soft: 0 4px 20px rgba(236, 106, 150, 0.10);
+  --shadow-soft: 0 4px 20px rgba(236, 106, 150, 0.1);
   --shadow-lift: 0 12px 32px rgba(236, 106, 150, 0.18);
 
-  --font-body: 'Poppins', sans-serif;
-  --font-script: 'Pacifico', cursive;
+  --font-body: "Poppins", sans-serif;
+  --font-script: "Pacifico", cursive;
 }
 
 * {
@@ -58,7 +58,12 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--text);
-  background: linear-gradient(180deg, var(--gray-bg) 0%, var(--pink-lightest) 45%, var(--pink-light) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--gray-bg) 0%,
+    var(--pink-lightest) 45%,
+    var(--pink-light) 100%
+  );
   overflow-x: hidden;
 }
 
@@ -134,11 +139,13 @@ button {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: #FFF6F9;
+  background: #fff6f9;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
 }
 
 .loading-screen.loading-hidden {
@@ -164,8 +171,15 @@ button {
 }
 
 @keyframes pulseShield {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.08); opacity: 0.75; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.75;
+  }
 }
 
 .loading-title {
@@ -191,7 +205,7 @@ button {
   border-radius: 20px;
   margin-top: 22px;
   overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .progress-fill {
@@ -343,7 +357,9 @@ main section {
   padding: 28px;
   overflow: hidden;
   border: 1px solid var(--pink-light);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
 .license-card:hover {
@@ -413,8 +429,13 @@ main section {
 }
 
 @keyframes statusBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }
 
 .license-card-body {
@@ -521,14 +542,23 @@ main section {
 
 .stat-fill-infinite {
   width: 100% !important;
-  background: linear-gradient(90deg, var(--pink-accent), var(--pink-mid), var(--pink-accent));
+  background: linear-gradient(
+    90deg,
+    var(--pink-accent),
+    var(--pink-mid),
+    var(--pink-accent)
+  );
   background-size: 200% 100%;
   animation: infiniteShimmer 2.5s linear infinite;
 }
 
 @keyframes infiniteShimmer {
-  0% { background-position: 0% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .stat-number {
@@ -561,7 +591,11 @@ main section {
 .pink-card {
   border: 1.5px solid var(--pink-mid);
   border-left: 6px solid var(--pink-accent);
-  background: linear-gradient(180deg, var(--white) 0%, var(--pink-lightest) 130%);
+  background: linear-gradient(
+    180deg,
+    var(--white) 0%,
+    var(--pink-lightest) 130%
+  );
 }
 
 .notice-card-header {
@@ -625,7 +659,7 @@ main section {
 }
 
 .warning-card .notice-list li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 8px;
@@ -636,7 +670,7 @@ main section {
 }
 
 .pink-card .notice-list li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 8px;
@@ -689,7 +723,9 @@ main section {
   padding-bottom: 34px;
   opacity: 0;
   transform: translateX(-16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .timeline-item.timeline-visible {
@@ -760,7 +796,9 @@ main section {
   padding: 8px 16px;
   border-radius: 20px;
   overflow: hidden;
-  transition: color 0.25s ease, border-color 0.25s ease;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .renew-trigger:hover {
@@ -847,13 +885,19 @@ main section {
   max-width: 340px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes modalPop {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-state-hidden {
@@ -871,7 +915,9 @@ main section {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .modal-text {
@@ -915,7 +961,9 @@ main section {
   font-size: 0.85rem;
   padding: 10px 24px;
   border-radius: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .modal-close:hover {
@@ -936,7 +984,9 @@ main section {
 .fade-up {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .fade-up.fade-up-visible {
@@ -954,7 +1004,7 @@ main section {
 
 .verify-section::before,
 .verify-section::after {
-  content: '✦';
+  content: "✦";
   position: absolute;
   color: var(--pink-mid);
   font-size: 1.1rem;
@@ -974,7 +1024,7 @@ main section {
 }
 
 .timeline-section::before {
-  content: '✦';
+  content: "✦";
   position: absolute;
   top: 8px;
   right: 6%;
@@ -1034,9 +1084,81 @@ main section {
     padding: 8px;
   }
   .navbar-badge::after {
-    content: '✓';
+    content: "✓";
     font-size: 0.8rem;
   }
+}
+
+.gallery-section {
+  padding: 70px 0;
+}
+
+#memory-gallery {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 30px;
+
+  margin-top: 40px;
+}
+
+.memory-card {
+  background: white;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+  transition: 0.35s;
+}
+
+.memory-card:hover {
+  transform: translateY(-10px);
+}
+
+.memory-card img {
+  width: 100%;
+
+  height: 260px;
+
+  object-fit: cover;
+
+  transition: 0.4s;
+}
+
+.memory-card:hover img {
+  transform: scale(1.08);
+}
+
+.memory-content {
+  padding: 18px;
+}
+
+.memory-date {
+  color: #ec6a96;
+
+  font-weight: 600;
+
+  margin: 8px 0;
+}
+
+.memory-record {
+  margin-top: 15px;
+
+  padding-top: 15px;
+
+  border-top: 1px dashed #ddd;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 0.8rem;
+
+  color: #777;
 }
 
 /* Reduced motion */
